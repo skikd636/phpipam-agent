@@ -545,7 +545,7 @@ if (!preg_match('/timed out/', $line)) {
 	 */
 	public function ping_update_lastseen ($id, $datetime = null) {
     	# set datetime
-    	$datetime = is_null($datetime) ? date("Y-m-d H:i:s") : $datetime;
+    	$datetime = is_null($datetime) ? gmdate("Y-m-d H:i:s") : $datetime;
 		# execute
 		try { $this->Database->updateObject("ipaddresses", array("id"=>$id, "lastSeen"=>$datetime), "id"); }
 		catch (Exception $e) {
@@ -565,10 +565,10 @@ if (!preg_match('/timed out/', $line)) {
 	 */
 	public function ping_update_scanagent_checktime ($id, $date = false) {
     	# set time
-    	if ($date === false)    { $date = date("Y-m-d H:i:s"); }
+    	if ($date === false)    { $date = gmdate("Y-m-d H:i:s"); }
     	else                    { $date = $date; }
 		# execute
-		try { $this->Database->updateObject("scanAgents", array("id"=>$id, "last_access"=>date("Y-m-d H:i:s")), "id"); }
+		try { $this->Database->updateObject("scanAgents", array("id"=>$id, "last_access"=>gmdate("Y-m-d H:i:s")), "id"); }
 		catch (Exception $e) {
 		}
 	}
@@ -583,7 +583,7 @@ if (!preg_match('/timed out/', $line)) {
 	 */
 	public function update_subnet_scantime ($subnet_id, $datetime = false) {
 		// set date
-		$datetime = $datetime===false ? date("Y-m-d H:i:s") : $datetime;
+		$datetime = $datetime===false ? gmdate("Y-m-d H:i:s") : $datetime;
 		// update
 		try { $this->Database->updateObject("subnets", array("id"=>$subnet_id, "lastScan"=>$datetime), "id"); }
 		catch (Exception $e) {}
@@ -599,7 +599,7 @@ if (!preg_match('/timed out/', $line)) {
 	 */
 	public function update_subnet_discoverytime ($subnet_id, $datetime = false) {
 		// set date
-		$datetime = $datetime===false ? date("Y-m-d H:i:s") : $datetime;
+		$datetime = $datetime===false ? gmdate("Y-m-d H:i:s") : $datetime;
 		// update
 		try { $this->Database->updateObject("subnets", array("id"=>$subnet_id, "lastDiscovery"=>$datetime), "id"); }
 		catch (Exception $e) {}

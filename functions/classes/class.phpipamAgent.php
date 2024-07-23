@@ -198,7 +198,7 @@ class phpipamAgent extends Common_functions {
 	 * @return void
 	 */
 	private function set_now_time () {
-    	$this->nowdate  = date("Y-m-d H:i:s");
+    	$this->nowdate  = gmdate("Y-m-d H:i:s");
     	$this->now      = strtotime($this->nowdate);
 	}
 

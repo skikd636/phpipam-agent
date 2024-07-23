@@ -126,11 +126,11 @@ abstract class DB {
 	 */
 	public static function toDate($date = null) {
 		if (is_int($date)) {
-			return date('Y-m-d H:i:s', $date);
+			return gmdate('Y-m-d H:i:s', $date);
 		} else if (is_string($date)) {
-			return date('Y-m-d H:i:s', strtotime($date));
+			return gmdate('Y-m-d H:i:s', strtotime($date));
 		} else {
-			return date('Y-m-d H:i:s');
+			return gmdate('Y-m-d H:i:s');
 		}
 	}
 
