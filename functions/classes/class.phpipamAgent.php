@@ -1157,6 +1157,18 @@ class phpipamAgent extends Common_functions {
 					$this->Result->throw_exception(500, "Error: ".$e->getMessage());
 				}
 			}
+            else
+            {
+                $hostname = $this->resolve_address($addr, true);
+                $query = "UPDATE `ipaddresses` SET hostname = ? WHERE `subnetId` = ? AND `ip_addr` = ? limit 1;";
+                $vars  = array($hostname['name'], $addr['subnetId'], $addr['ip_addr']);
+                
+				try { $this->Database->runQuery($query, $vars); }
+				catch (Exception $e) {
+					$this->Result->throw_exception(500, "Error: ".$e->getMessage());
+				}                
+                
+            }            
 		}
 	}
 
@@ -1213,8 +1225,7 @@ class phpipamAgent extends Common_functions {
 			}
 		}
 	}
-
-
+    
 	/**
 	 * @common functions for both methods
 	 * ---------------------------------
