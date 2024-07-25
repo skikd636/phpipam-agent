@@ -1145,7 +1145,7 @@ class phpipamAgent extends Common_functions {
 
         foreach ($DHCPAddresses as $addr) {
             $query = "UPDATE `ipaddresses` SET `lastSeen` = ?, hostname = '' WHERE `subnetId` = ? AND `ip_addr` = ? limit 1;";
-            $vars  = array(NULL, $addr['subnetId'], $addr['ip_addr']);
+            $vars  = array("1970-01-01 00:00:01", $addr['subnetId'], $addr['ip_addr']);
 
             try { $this->Database->runQuery($query, $vars); }
             catch (Exception $e) {
