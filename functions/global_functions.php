@@ -138,3 +138,5 @@ function php_feature_missing($required_extensions = null, $required_functions = 
 
 	return false;
 }
+
+function gmp_pow2(int $exp) : GMP { $result = gmp_init(0); gmp_setbit($result, $exp); return $result; }
